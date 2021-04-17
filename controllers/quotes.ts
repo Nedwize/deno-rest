@@ -1,10 +1,12 @@
 import { MongoClient } from "https://deno.land/x/mongo@v0.22.0/mod.ts";
 import { Quote } from "../types.ts";
 
+const URI = "mongodb://127.0.0.1:27017";
+
 // Mongo Connection Init
 const client = new MongoClient();
 try {
-  await client.connect("mongodb://127.0.0.1:27017");
+  await client.connect(URI);
   console.log("Database successfully connected");
 } catch (err) {
   console.log(err);
@@ -46,8 +48,8 @@ const getQuote = async ({
   params,
   response,
 }: {
-  params: { id: string },
-  response: any,
+  params: { id: string };
+  response: any;
 }) => {
   const quote = await quotes.findOne({ quoteID: params.id });
 
@@ -72,8 +74,8 @@ const addQuote = async ({
   request,
   response,
 }: {
-  request: any,
-  response: any,
+  request: any;
+  response: any;
 }) => {
   try {
     if (!request.hasBody) {
@@ -107,9 +109,9 @@ const updateQuote = async ({
   request,
   response,
 }: {
-  params: { id: string },
-  request: any,
-  response: any,
+  params: { id: string };
+  request: any;
+  response: any;
 }) => {
   try {
     const body = await request.body();
@@ -138,9 +140,9 @@ const deleteQuote = async ({
   params,
   response,
 }: {
-  params: { id: string },
-  request: any,
-  response: any,
+  params: { id: string };
+  request: any;
+  response: any;
 }) => {
   try {
     await quotes.deleteOne({ quoteID: params.id });
