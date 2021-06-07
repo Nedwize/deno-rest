@@ -5,7 +5,7 @@ import {
   getQuote,
   updateQuote,
   deleteQuote,
-} from "./controllers/products.ts";
+} from "./controllers/quotes.ts";
 
 const router = new Router();
 
